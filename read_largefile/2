@@ -1,0 +1,7 @@
+apple zabbix apple home, large, file. My name is large file
+hello
+Do you want some coffee
+The Salt Open 2015.8 release is out and it includes a ton of new capabilities to help orchestrate and automate event-driven IT operations. Highlights include the new Salt Package Manager, a substantially updated Salt Proxy Minion for control of network and Internet of things devices, and new support for Docker, OpenStack, Windows, Git, cloud management and much more.
+Learn more about the 2015.8 release highlights by registering to watch Thomas Hatch and Matt Meservey of SaltStack on this webinar. Or, download the 2015.8 release packaged for CentOS, Debian, RHEL, Ubuntu and Windows from the SaltStack package repository. Also, the Salt Open 2015.8 release notes have all the details, but we’ve provided a high-level overview for you in the post below.
+For starters, SaltStack now maintains its own package repositories for Salt Open providing users with even more options to access the power of SaltStack. We hope the Salt package repo will help users get up and running faster with SaltStack in a more consumable and consistent way.
+In addition, the Salt Open 2015.8 release ships with the new Salt Package Manager, making Salt Formulas for system orchestration and configuration management even easier to deploy.
