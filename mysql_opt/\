@@ -1,0 +1,3 @@
+#!/usr/binpython
+
+import MySQLdb
