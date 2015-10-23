@@ -12,7 +12,7 @@ class attacker(unit):
             print u.name + " was dead!!!"
             del u
         else:
-            print u.name + " was attacked! __bool = " + str(u.blood)
+            print u.name + " was attacked! bool = " + str(u.blood)
 class boomer(attacker):
     def __init__(self, name):
         self.name = name
@@ -24,7 +24,7 @@ class boomer(attacker):
         print self.name + " was boom!!"
         if u.blood <= 0:
             print u.name + " was dead!!!"
-            del u
+            u.__delattr__
         del self
 class machineGun(attacker):
     def __init__(self, name):
@@ -50,7 +50,7 @@ class healer(unit):
         u.blood += self.hps
         if u.blood >= u.blood_max:
             u.blood = u.blood_max
-        print u.name + " was healed ! __blood = " + str(u.blood)
+        print u.name + " was healed ! blood = " + str(u.blood)
 j1 = machineGun("j1")
 j2 = machineGun("j2")
 t1 = tree('t1')
@@ -58,4 +58,5 @@ h1 = healer('h1')
 j2.attack(t1)
 h1.heal(t1)
 b1 = boomer("b1")
+#j1.attack(b1)
 b1.boom(j1)
