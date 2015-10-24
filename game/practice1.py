@@ -52,10 +52,7 @@ class healer(unit):
             u.blood = u.blood_max
         print u.name + " was healed ! __blood = " + str(u.blood)
 j1 = machineGun("j1")
-j2 = machineGun("j2")
-t1 = tree('t1')
-h1 = healer('h1')
-j2.attack(t1)
-h1.heal(t1)
 b1 = boomer("b1")
 b1.boom(j1)
+print j1
+print b1
