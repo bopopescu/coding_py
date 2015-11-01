@@ -49,20 +49,19 @@ class DownLoader():
             print e
             return 0
 
-    def distribute(self):
-        PositionList = []
-        for Position in range(0, self.file_size + 1, self.file_offset):
-            PositionList.append(Position)
-        file_end = self.file_size % self.WorkerCount
-        if file_end != 0:
-            PositionList.append(self.file_size)
-        return PositionList[1:]
+    def downloadDistribute(self):
+        positionList = []
+        for Position in range(0, self.file_size, self.file_offset):
+            positionList.append(Position)
+        if positionList[-1] != self.file_size:
+            positionList.append(self.file_size)
+        return positionList[1:]
 
         
     def run(self):
         thread_list = []
         n = 0
-        for size in self.distribute():
+        for size in self.downloadDistribute():
             print 'thread %d - start: %s, end: %s' % (n, size - self.file_offset,\
                                                         size)
             thread = threading.Thread(target=self.DownLoadWorker,\
@@ -76,7 +75,7 @@ class DownLoader():
         print 'File:%s was Downloaded success!' % self.file_name
 if __name__ == '__main__':
     time_start = time.time()
-    down = DownLoader(4)
+    down = DownLoader(50)
     down.run()
     time_end = time.time()
     used_time = time_end - time_start
