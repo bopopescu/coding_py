@@ -4,7 +4,7 @@
 import signal,functools,time
 class TimeoutError(Exception):pass
 
-def timeout(seconds, error_message = 'Function call timed out'):
+def Timeout(seconds, error_message = 'Function call timed out'):
     def decorated(func):
         def _handle_timeout(signum, frame):
             raise TimeoutError(error_message)
@@ -19,7 +19,7 @@ def timeout(seconds, error_message = 'Function call timed out'):
         return functools.wraps(func)(wrapper)
     return decorated
 
-@timeout(5)
+@Timeout(5)
 def sleep():
     time.sleep(0.5)
     time.sleep(6)
