@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#conding=utf-8
+#coding=utf-8
 
 from daemon import Daemon
 import socket
@@ -9,6 +9,7 @@ import pdb
 
 
 __all__ = ["nbNet", "sendData_mh"]
+from nbNetUtils import *
 
 class NetBase:
     def setFd(self, sock):
@@ -119,7 +120,7 @@ class NetBase:
                 #使用状态机进行处理各种状态
                 self.state_machine(fd)
     def state_machine(self, fd):
-        dbgPrint("\n -state machine: fd: %d, status: %s" % (fd, self.conn_state[fd].state)
+        dbgPrint("\n -state machine: fd: %d, status: %s" % (fd, self.conn_state[fd].state))
         sock_state = self.conn_state[fd]
         #根据不同的状态调用不同的处理函数
         self.sm[sock_state.state](fd)
@@ -164,7 +165,7 @@ class Net(NetBase):
     def accept2read(self, fd):
         conn = self.accept(fd)
         self.epoll_sock.register(conn.fileno(), select.EPOLLIN)
-        #对新的连接进行初始化 
+        #将socket连接放入conn_state 
         self.setFd(conn)
         #新连接的初始状态为read
         self.conn_state[conn.fileno()].state = "read"
@@ -223,6 +224,6 @@ if __name__ == '__main__':
     def logic(d_in):
         return(d_in[::-1])
 
-    reverseD = nbNet('0.0.0.0', 9076, logic)
+    reverseD = Net('0.0.0.0', 9099, logic)
     reverseD.run()
 
