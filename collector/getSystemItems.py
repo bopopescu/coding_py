@@ -15,7 +15,7 @@ class getItems:
             a = load_open.read().split()[:3]
             return float(a[0])
     
-    def getMemInfo(self, memUsage = False, memFree = False, noBufferCache = True):
+    def getMemUsage(self, memUsage = True, memFree = False, noBufferCache = True):
         if noBufferCache:
             with open('/proc/meminfo') as mem_open:
                 Total = int(mem_open.readline().split()[1])

@@ -32,18 +32,16 @@ class porterThread(threading.Thread):
 
     def put_data(self):
         m = getItems()
-        #atime = int(time.time())
+        atime = int(time.time())
         while 1:
-            atime = int(time.time())
             print "This is worker %s" % self.name
             self.lock.acquire()
             data = m.runAllGet()
             print "collected data: %s" % data
             self.q.put(data)
             btime = int(time.time())
-            time.sleep(0.5)
+            time.sleep(self.interval - (btime - atime) % self.interval)
             self.lock.release()
-            time.sleep(self.interval)
 
     def get_data(self):
         while 1:
@@ -51,7 +49,7 @@ class porterThread(threading.Thread):
             if not self.q.empty():
                 data = self.q.get()
                 print data
-                #sendData_mh(self.sock_l, trans_l, json.dumps(data))
+                sendData_mh(self.sock_l, trans_l, json.dumps(data))
                 time.sleep(self.interval)
 
 def startTh():
