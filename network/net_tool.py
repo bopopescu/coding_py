@@ -137,9 +137,12 @@ class Net(NetBase):
         #将socket连接加入到conn_state
         self.setFd(self.listen_sock)
         #初始化epoll
-        self.epoll_sock = select.epoll()
+        #self.epoll_sock = select.epoll()
+        self.epoll_sock = select.kqueue()
         #注册epoll
-        self.epoll_sock.register(self.listen_sock.fileno(), select.EPOLLIN)
+        #self.epoll_sock.register(self.listen_sock.fileno(), select.EPOLLIN)
+        self.evf = select.kevent(self.listen_sock.fileno(), select.KQ_FILTER_READ, selsct.KQ_EV_ADD)
+        self.epoll_sock.control([self.evf], 5)
         #逻辑函数
         self.logic = logic
         #下面的字典放着各种状态的处理函数
