@@ -1,1 +1,13 @@
+.DS_Store
+tags
+*.swp
+logs
+local.json
+local.conf
+.idea
 *.pyc
+__pycache__
+website/static/images
+.module-cache
+node_modules
+~*
