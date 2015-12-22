@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #coding=utf-8
 
 class ChildTree:
@@ -17,10 +17,12 @@ class ChildTree:
         return self.data
 
     def setLeftChild(self, new_tree):
-        self.left_child = new_tree
+        self.left_child = ChildTree(new_tree)
+        return self.left_child
 
     def setRightChild(self, new_tree):
-        self.right_child = new_tree
+        self.right_child = ChildTree(new_tree)
+        return self.right_child
 
     def setValue(self, val):
         self.data = val
@@ -28,6 +30,12 @@ class ChildTree:
 class BinaryTree:
     def __init__(self, root):
         self.root = ChildTree(root)
+
+    def createTree(self, node):
+        val = input("Please input node value:")
+        if val != '0':
+            createTree(node.setLeftChild(val))
+            createTree(node.setRightChild(val))
 
     def insert_left(self, new_node):
         if self.root.left_child == None:
@@ -45,4 +53,6 @@ class BinaryTree:
             tmp.setRightChild(self.root.getRightChild())
             self.root.setRightChild(tmp)
 
-
+if __name__ == '__main__':
+    bt = BinaryTree(24)
+    bt.createTree(bt.root)
