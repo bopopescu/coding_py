@@ -21,7 +21,7 @@ def preorder_traverse(binary_tree):
 
 
 bt = BinaryTree(24)
-bt.insert_left(15)
+bt.createTree()
 #print(bt.root.getLeftChild())
 #bt.root.getLeftChild().insert_left(4)
 #bt.root.getLeftChild().insert_right(43)

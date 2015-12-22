@@ -16,12 +16,12 @@ class ChildTree:
     def getValue(self):
         return self.data
 
-    def setLeftChild(self, new_tree):
-        self.left_child = ChildTree(new_tree)
+    def setLeftChild(self):
+        self.left_child = ChildTree(None)
         return self.left_child
 
-    def setRightChild(self, new_tree):
-        self.right_child = ChildTree(new_tree)
+    def setRightChild(self):
+        self.right_child = ChildTree(None)
         return self.right_child
 
     def setValue(self, val):
@@ -32,10 +32,19 @@ class BinaryTree:
         self.root = ChildTree(root)
 
     def createTree(self, node):
-        val = input("Please input node value:")
+        if node == self.root:
+            print("Now set root value,")
+        val = input("please input node value:")
         if val != '0':
-            createTree(node.setLeftChild(val))
-            createTree(node.setRightChild(val))
+            print('=============================')
+            node.setValue(val)
+            print("Now insert left node,")
+            self.createTree(node.setLeftChild())
+            print("Now insert right node,")
+            self.createTree(node.setRightChild())
+        else:
+            print("/------skip this node------/")
+
 
     def insert_left(self, new_node):
         if self.root.left_child == None:
@@ -56,3 +65,5 @@ class BinaryTree:
 if __name__ == '__main__':
     bt = BinaryTree(24)
     bt.createTree(bt.root)
+    print(bt.root.getLeftChild().getValue())
+    print(bt.root.getRightChild().getValue())
