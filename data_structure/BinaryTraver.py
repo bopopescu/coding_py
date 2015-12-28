@@ -46,28 +46,19 @@ def inorder_traverse(binary_tree):
 
 def postorder_traverse(binary_tree):
     result = []
-    parent_stack = []
-    if binary_tree.root:
-        node = binary_tree.root
-        while node:
-            if node.data:
-                parent_stack.append(node)
-            node = node.getLeftChild()
-            pdb.set_trace()
-            while not node:
-                if len(parent_stack) != 0:
-                    node = parent_stack.pop()
-                    if not node.getRightChild():
-                        val = node.getValue()
-                        if val:
-                            reslut.append(val)
-                    else:
-                        node = node.getRightChild()
-                else:
-                    break
-    return result
+    stack_1 = []
+    stack_2 = []
+    stack_1.append(binary_tree.root)
+    while len(stack_1) != 0:
+        node = stack_1.pop()
+        stack_2.append(node.getValue())
+        if node.getLeftChild():
+            stack_1.append(node.getLeftChild())
+        if node.getRightChild():
+            stack_1.append(node.getRightChild())
+    stack_2.reverse()
+    return stack_2
 
-                    
 
 bt = BinaryTree(24)
 bt.createTree(bt.root)
