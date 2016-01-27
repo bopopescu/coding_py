@@ -2,6 +2,7 @@
 #coding=utf-8
 
 import redis
+import sys
 
 def connect_handle(_host, _port):
     return redis.Redis(host=_host, port=_port, db=0)
@@ -19,9 +20,13 @@ def search(redis_key, conn, filter_key = None, filter_value = None):
 
         return result
 
+
 if __name__ == '__main__':
-    HOST = '127.0.0.1'
-    PORT = 6379
+    if len(sys.argv) > 1 and ('-d' in sys.argv):
+        pass
+    else:
+        HOST = '127.0.0.1'
+        PORT = 6379
     redis_key = "2015-11-24-T002-union-dispatch"
     filter_key = 'spu_id'
     filter_value = 'C03998'
