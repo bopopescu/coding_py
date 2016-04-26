@@ -10,4 +10,5 @@ __pycache__
 website/static/images
 .module-cache
 node_modules
+conf/
 ~*
