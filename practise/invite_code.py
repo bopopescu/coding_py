@@ -53,14 +53,17 @@ class InviteCode:
                 self.w_Session.query(InviteCodeModel). \
                     filter(InviteCodeModel.id == invite_code_id). \
                     update({'user_id': user_id})
+                self.w_Session.query(InviteCodeModel). \
+                    filter(InviteCodeModel.id == invite_code_id). \
+                    update({'user_id': user_id})
         except:
             self.w_Session.rollback()
         finally:
             self.w_Session.commit()
 
     def close(self):
+        print(dir(self.w_Session))
         self.w_Session.remove()
-        self.r_Session.remove()
 
 
 
@@ -69,7 +72,7 @@ if __name__ == "__main__":
     print(a.generate_code())
     a.init_mysql_read_session()
     a.init_mysql_write_session()
-    a.distribute_code_to_user(user_id=1, invite_code_id=1)
+    a.distribute_code_to_user(user_id=3, invite_code_id=3)
     # a.save_to_mysql()
     a.close()
     # a.create_user_obj()
