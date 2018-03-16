@@ -16,7 +16,7 @@ def get_maxmin_time(num_string):
 
     max_rst = [None for i in range(6)]
     min_rst = [None for i in range(6)]
-    # hour_set = False
+    # 小时和分钟十位1和个位2的下标
     index1 = 2
     index2 = 3
 
@@ -25,9 +25,6 @@ def get_maxmin_time(num_string):
     for i in range(5, -1, -1):
         # 最小时间
         min_rst[i] = num_string[i]
-        # if max_rst_full:
-        #     break
-
         # 最大时间
         if not max_rst[1] and min_val < '2' and not count.get('2', None):
             max_rst[1] = num_string[i]
@@ -50,22 +47,15 @@ def get_maxmin_time(num_string):
     print("min_date:")
     print(''.join(str(num) for num in min_rst))
 
-
     return True
 
-
-
 def check_valid_num_string(num_string):
-
     if len(num_string) != 6:
         return False
 
     num_string = sorted(num_string)
 
-    # 不用自建方法
-    # count = [0 for i in range(len(num_string))]
-
-    # 使用自建方法
+    # 使用内建方法
     count = collections.Counter(num_string)
     count = dict(count)
 
@@ -75,7 +65,6 @@ def check_valid_num_string(num_string):
     c0_5 = 0
     c6_9 = 0
     for key, value in count.items():
-        # count_num += value
         # 统计小于2的个数
         if key < '2':
             cl2 += value
