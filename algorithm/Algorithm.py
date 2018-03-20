@@ -3,6 +3,7 @@ import random
 
 class Algorithm(object):
 
+    @staticmethod
     def swap(swap_list, index_a, index_b):
         tmp = swap_list[index_a]
         swap_list[index_a] = swap_list[index_b]
@@ -59,27 +60,39 @@ class Algorithm(object):
 
         return sort_list
 
-    def partion(self, sort_list, lo, hi):
+    @classmethod
+    def partion(cls, sort_list, lo, hi):
         p = sort_list[lo]
+        cur_lo = lo
+        cur_hi = hi
         while True:
-            for i in range(hi, lo, -1):
+            for i in range(cur_hi, cur_lo - 1, -1):
+                cur_hi = i
                 if sort_list[i] < p:
                     break
 
-            for j in range(lo + 1, hi):
+            for j in range(cur_lo, cur_hi + 1):
+                cur_lo = j
                 if sort_list[j] > p:
                     break
 
-            if i <= j:
+            if cur_lo >= cur_hi:
                 break
 
-            self.swap(sort_list, i, j)
-        self.swap(sort_list, lo, i)
-        return i
+            cls.swap(sort_list, cur_hi, cur_lo)
+        cls.swap(sort_list, lo, cur_hi)
+        return cur_hi
 
     @classmethod
-    def quick_sort(cls, sort_list):
-        N = len(sort_list)
+    def quick_sort(cls, sort_list, lo, hi):
+        N = len(sort_list) - 1
+        if lo <= hi:
+            mid = cls.partion(sort_list, lo, hi)
+            cls.quick_sort(sort_list, lo, mid - 1)
+            cls.quick_sort(sort_list, mid + 1, hi)
+
+        return sort_list
+
 
 
     @classmethod
@@ -91,6 +104,7 @@ class Algorithm(object):
             "insert_sort": cls.insert_sort,
             "shell_sort": cls.insert_sort,
             "bubble_sort": cls.insert_sort,
+            # "quick_sort": cls.quick_sort,
         }
         print("Before Sort:\n")
         print(sort_list)
@@ -99,7 +113,15 @@ class Algorithm(object):
             print(name)
             print(func(sort_list.copy()))
 
+        print("\nAfter Sort:\n")
+        print("quict_sort:")
+        # sort_list = [2, 4, 6, 2 ,7,8]
+        ans = cls.quick_sort(sort_list.copy(), 0, len(sort_list) - 1)
+        print(ans)
+
+
 Algorithm.demo_function()
+# Algorithm.quick_sort([3,6, 2,1], 0, 4)
 
 
 
